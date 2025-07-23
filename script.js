@@ -1,7 +1,7 @@
 const validIdentifiant = '212000';
 const validPassword = '2103';
 
-const loginContainer = document.getElementById('login-container');
+const loginContain = document.getElementById('login-container');
 const dashboard = document.getElementById('dashboard');
 const btnLogin = document.getElementById('btn-login');
 const errorMsg = document.getElementById('error-msg');
@@ -147,12 +147,62 @@ virementForm.addEventListener('submit', e => {
       soldeEpargne -= montant;
     }
     updateSoldeUI();
+    let compteBloque = true; // true = compte bloqué, false = compte actif
+
+virementForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  if (compteBloque) {
+    virementMessage.style.color = 'red';
+    virementMessage.textContent = 'Votre compte est bloqué. Vous ne pouvez pas effectuer de virements.';
+    return;
+  }
+
+  // Le reste du code virement habituel...
+  const compteSource = document.getElementById('compte-source').value;
+  const beneficiaire = document.getElementById('beneficiaire').value.trim();
+  const montantInput = document.getElementById('montant');
+  const montant = Math.round(parseFloat(montantInput.value) * 100);
+
+  virementMessage.style.color = '#ffd633';
+  virementMessage.textContent = 'Virement en cours...';
+
+  if (beneficiaire === '') {
+    virementMessage.style.color = 'red';
+    virementMessage.textContent = 'Veuillez saisir un bénéficiaire.';
+    return;
+  }
+  if (isNaN(montant) || montant <= 0) {
+    virementMessage.style.color = 'red';
+    virementMessage.textContent = 'Montant invalide.';
+    return;
+  }
+
+  if (compteSource === 'courant' && montant > soldeCourant) {
+    virementMessage.style.color = 'red';
+    virementMessage.textContent = 'Solde insuffisant sur le compte courant.';
+    return;
+  }
+  if (compteSource === 'epargne' && montant > soldeEpargne) {
+    virementMessage.style.color = 'red';
+    virementMessage.textContent = 'Solde insuffisant sur le compte épargne.';
+    return;
+  }
+
+  setTimeout(() => {
+    if (compteSource === 'courant') {
+      soldeCourant -= montant;
+    } else {
+      soldeEpargne -= montant;
+    }
+    updateSoldeUI();
     virementMessage.style.color = '#00cc00';
     virementMessage.textContent = `Virement de ${formatEuro(montant)} effectué vers ${beneficiaire}.`;
     montantInput.value = '';
     document.getElementById('beneficiaire').value = '';
     updateChartBalance();
   }, 1500);
+});
 });
 
 // Chart.js solde courant (6 mois)
