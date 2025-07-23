@@ -1,154 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-* {
-  box-sizing: border-box;
-}
+
 body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #001933, #003366);
-  margin: 0;
-  color: #eee;
-}
-.container {
-  max-width: 900px;
-  margin: 30px auto;
-  background: #0d1a33;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-}
-h1, h2 {
-  color: #ffcc00;
-  margin-bottom: 20px;
-}
-.slogan {
-  font-style: italic;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
   color: #ffd633;
-  margin-top: -15px;
-  margin-bottom: 30px;
+  margin: 0;
+  padding: 0;
 }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.login-container {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  background: #222;
+  border-radius: 8px;
+  text-align: center;
+}
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
 }
 button {
-  background-color: #ffcc00;
+  background-color: #ffd633;
   border: none;
   padding: 10px 20px;
-  font-weight: 700;
-  color: #001933;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
-button:hover {
-  background-color: #e6b800;
+button:disabled {
+  background-color: #aaa;
+}
+.error-msg {
+  color: #ff4444;
+  font-weight: bold;
 }
 nav {
+  background-color: #1e1e1e;
+  padding: 10px;
   display: flex;
-  gap: 30px;
-  margin-bottom: 25px;
-  border-bottom: 2px solid #ffcc00;
+  gap: 20px;
 }
 nav a {
   color: #ffd633;
-  font-weight: 700;
   text-decoration: none;
-  padding-bottom: 6px;
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  transition: border-bottom 0.3s ease;
+  font-weight: bold;
 }
 nav a.active {
-  border-bottom: 3px solid #ffcc00;
+  border-bottom: 2px solid #ffd633;
 }
 .content-section {
   display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  padding: 20px;
 }
 .content-section.active-section {
   display: block;
-  opacity: 1;
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  color: #ffd633;
-}
-th, td {
-  padding: 12px 15px;
-  text-align: left;
-}
-th {
-  background-color: #b38f00;
-}
-tr:nth-child(even) {
-  background-color: #334466;
-}
-input, select {
-  width: 100%;
-  padding: 8px 10px;
-  margin: 8px 0 15px;
-  border-radius: 5px;
-  border: none;
-  font-size: 1rem;
-}
-input:focus, select:focus {
-  outline: none;
-  box-shadow: 0 0 8px #ffcc00;
-}
-.error-msg {
-  color: #ff6666;
-  margin-bottom: 15px;
-}
-.loading {
-  margin-top: 20px;
-  color: #ffd633;
-}
-.spinner {
-  margin: 0 auto;
-  width: 40px;
-  height: 40px;
-  border: 5px solid #ffcc00;
-  border-top: 5px solid #333300;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to { transform: rotate(360deg);}
-}
-.card {
-  background: linear-gradient(135deg, #664d00, #ffcc00);
-  border-radius: 20px;
-  width: 320px;
-  height: 190px;
-  color: #001933;
-  padding: 25px 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-  font-weight: 600;
-  user-select: none;
-  margin-top: 20px;
-}
-.card-chip {
-  width: 50px;
-  height: 35px;
-  background: #333300;
-  border-radius: 6px;
-  margin-bottom: 25px;
-}
-.card-number {
-  font-size: 1.3rem;
-  letter-spacing: 3px;
-  margin-bottom: 15px;
-}
-.card-name {
-  text-transform: uppercase;
-  font-size: 1rem;
-}
-.card-expiry {
-  position: relative;
-  font-size: 0.9rem;
-  margin-top: 20px;
+#virement-message {
+  margin-top: 10px;
+  font-weight: bold;
 }

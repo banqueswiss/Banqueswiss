@@ -1,90 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Crédit Royal - Banque Privée</title>
-<link rel="stylesheet" href="style.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crédit Royal - Banque en ligne</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<div id="login-container" class="container">
-  <h2>Connexion Crédit Royal</h2>
-  <div id="error-msg" class="error-msg" style="display:none;"></div>
-  <input type="text" id="identifiant" placeholder="Identifiant" autocomplete="off" />
-  <input type="password" id="password" placeholder="Mot de passe" autocomplete="off" />
-  <button id="btn-login">Se connecter</button>
-  <div id="loading" class="loading" style="display:none;">
-    <div class="spinner"></div>
-    <p>Connexion en cours...</p>
+  <div id="login-container" class="login-container">
+    <h1>Crédit Royal</h1>
+    <input type="text" id="identifiant" placeholder="Identifiant" />
+    <input type="password" id="password" placeholder="Mot de passe" />
+    <button id="btn-login">Se connecter</button>
+    <p id="error-msg" class="error-msg"></p>
+    <div id="loading" class="loading" style="display:none;">Connexion...</div>
   </div>
-</div>
 
-<div id="dashboard" class="container" style="display:none;">
-  <header>
-    <h1>Bienvenue chez Crédit Royal</h1>
-    <p class="slogan">L’excellence au service de votre patrimoine</p>
-    <button id="btn-logout">Déconnexion</button>
-  </header>
+  <div id="dashboard" style="display:none;">
+    <nav>
+      <a href="#" class="active" data-section="comptes">Comptes</a>
+      <a href="#" data-section="virement">Virement</a>
+      <a href="#" data-section="profil">Profil</a>
+      <a href="#" id="btn-logout" style="float:right;">Déconnexion</a>
+    </nav>
+    <section id="comptes" class="content-section active-section">
+      <h2>Vos comptes</h2>
+      <p>Compte courant : <span id="solde-courant"></span></p>
+      <p>Compte épargne : <span id="solde-epargne"></span></p>
+    </section>
+    <section id="virement" class="content-section">
+      <h2>Effectuer un virement</h2>
+      <form id="virement-form">
+        <label for="compte-source">Compte source :</label>
+        <select id="compte-source">
+          <option value="courant">Compte courant</option>
+          <option value="epargne">Compte épargne</option>
+        </select><br/><br/>
+        <label for="beneficiaire">Bénéficiaire :</label>
+        <input type="text" id="beneficiaire" placeholder="Nom bénéficiaire" /><br/><br/>
+        <label for="montant">Montant (€) :</label>
+        <input type="number" id="montant" step="0.01" min="0" /><br/><br/>
+        <button type="submit">Envoyer</button>
+      </form>
+      <p id="virement-message"></p>
+    </section>
+    <section id="profil" class="content-section">
+      <h2>Profil utilisateur</h2>
+      <p>Nom d'utilisateur : Crédit Royal Client</p>
+      <p>Email : client@creditroyal.fr</p>
+    </section>
+  </div>
 
-  <nav>
-    <a href="#" class="active" data-section="comptes">Comptes</a>
-    <a href="#" data-section="virements">Virements</a>
-    <a href="#" data-section="cartes">Carte Bancaire</a>
-    <a href="#" data-section="epargne">Épargne</a>
-  </nav>
-
-  <section id="comptes" class="content-section active-section">
-    <h2>Mes Comptes</h2>
-    <table>
-      <thead>
-        <tr><th>Type de compte</th><th>Solde (€)</th><th>Dernière opération</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Compte courant</td><td id="solde-courant">2 000 000,00 €</td><td>Virement reçu - 23/07/2025</td></tr>
-        <tr><td>Compte épargne</td><td id="solde-epargne">12 300,50 €</td><td>Versement - 10/07/2025</td></tr>
-      </tbody>
-    </table>
-    <div id="graph-container">
-      <canvas id="soldeChart" width="600" height="300"></canvas>
-    </div>
-  </section>
-
-  <section id="virements" class="content-section">
-    <h2>Effectuer un virement</h2>
-    <form id="virement-form">
-      <label for="compte-source">Compte source :</label><br/>
-      <select id="compte-source" required>
-        <option value="courant">Compte courant - 2 000 000,00 €</option>
-        <option value="epargne">Compte épargne - 12 300,50 €</option>
-      </select><br/>
-      <label for="beneficiaire">Bénéficiaire :</label><br/>
-      <input type="text" id="beneficiaire" placeholder="Nom du bénéficiaire" required /><br/>
-      <label for="montant">Montant (€) :</label><br/>
-      <input type="number" id="montant" placeholder="0.00" min="0.01" step="0.01" required /><br/>
-      <button type="submit">Valider</button>
-    </form>
-    <div id="virement-message"></div>
-  </section>
-
-  <section id="cartes" class="content-section">
-    <h2>Ma carte bancaire</h2>
-    <div class="card">
-      <div class="card-chip"></div>
-      <div class="card-number" id="card-number">**** **** **** 1234</div>
-      <div class="card-name">Claire Fontaine</div>
-      <div class="card-expiry">12/27</div>
-    </div>
-  </section>
-
-  <section id="epargne" class="content-section">
-    <h2>Mon épargne</h2>
-    <p>Taux d'intérêt annuel : 1,25%</p>
-    <p>Solde disponible : <span id="epargne-solde">12 300,50 €</span></p>
-  </section>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
