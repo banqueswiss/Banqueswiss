@@ -14,7 +14,7 @@ body {
   border-radius: 8px;
   text-align: center;
 }
-input {
+input, select {
   width: 90%;
   padding: 10px;
   margin: 10px 0;
@@ -31,10 +31,6 @@ button {
 }
 button:disabled {
   background-color: #aaa;
-}
-.error-msg {
-  color: #ff4444;
-  font-weight: bold;
 }
 nav {
   background-color: #1e1e1e;
@@ -57,7 +53,24 @@ nav a.active {
 .content-section.active-section {
   display: block;
 }
+#error-msg {
+  color: #ff4444;
+  font-weight: bold;
+}
 #virement-message {
   margin-top: 10px;
   font-weight: bold;
+}
+.historique {
+  margin-top: 20px;
+  background: #1e1e1e;
+  padding: 10px;
+  border-radius: 6px;
+  font-family: monospace;
+  white-space: pre-line;
+}
+.lang-switch {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

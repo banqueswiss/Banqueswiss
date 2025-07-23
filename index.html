@@ -8,46 +8,60 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="lang-switch">
+    <label for="lang-select">Langue :</label>
+    <select id="lang-select">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+    </select>
+  </div>
+
   <div id="login-container" class="login-container">
-    <h1>Crédit Royal</h1>
+    <h1 data-i18n="title">Crédit Royal</h1>
     <input type="text" id="identifiant" placeholder="Identifiant" />
     <input type="password" id="password" placeholder="Mot de passe" />
-    <button id="btn-login">Se connecter</button>
+    <button id="btn-login" data-i18n="login">Se connecter</button>
     <p id="error-msg" class="error-msg"></p>
     <div id="loading" class="loading" style="display:none;">Connexion...</div>
   </div>
 
   <div id="dashboard" style="display:none;">
     <nav>
-      <a href="#" class="active" data-section="comptes">Comptes</a>
-      <a href="#" data-section="virement">Virement</a>
-      <a href="#" data-section="profil">Profil</a>
-      <a href="#" id="btn-logout" style="float:right;">Déconnexion</a>
+      <a href="#" class="active" data-section="comptes" data-i18n="nav_comptes">Comptes</a>
+      <a href="#" data-section="virement" data-i18n="nav_virement">Virement</a>
+      <a href="#" data-section="profil" data-i18n="nav_profil">Profil</a>
+      <a href="#" id="btn-logout" style="float:right;" data-i18n="logout">Déconnexion</a>
     </nav>
+
     <section id="comptes" class="content-section active-section">
-      <h2>Vos comptes</h2>
+      <h2 data-i18n="your_accounts">Vos comptes</h2>
       <p>Compte courant : <span id="solde-courant"></span></p>
       <p>Compte épargne : <span id="solde-epargne"></span></p>
+      <h3 data-i18n="history_title">10 dernières opérations</h3>
+      <div id="historique" class="historique"></div>
     </section>
+
     <section id="virement" class="content-section">
-      <h2>Effectuer un virement</h2>
+      <h2 data-i18n="transfer_title">Effectuer un virement</h2>
       <form id="virement-form">
-        <label for="compte-source">Compte source :</label>
+        <label for="compte-source" data-i18n="from_account">Compte source :</label>
         <select id="compte-source">
           <option value="courant">Compte courant</option>
           <option value="epargne">Compte épargne</option>
         </select><br/><br/>
-        <label for="beneficiaire">Bénéficiaire :</label>
-        <input type="text" id="beneficiaire" placeholder="Nom bénéficiaire" /><br/><br/>
-        <label for="montant">Montant (€) :</label>
+        <label for="beneficiaire" data-i18n="beneficiary">Bénéficiaire :</label>
+        <input type="text" id="beneficiaire" /><br/><br/>
+        <label for="montant" data-i18n="amount">Montant (€) :</label>
         <input type="number" id="montant" step="0.01" min="0" /><br/><br/>
-        <button type="submit">Envoyer</button>
+        <button type="submit" data-i18n="send">Envoyer</button>
       </form>
       <p id="virement-message"></p>
     </section>
+
     <section id="profil" class="content-section">
-      <h2>Profil utilisateur</h2>
-      <p>Nom d'utilisateur : Crédit Royal Client</p>
+      <h2 data-i18n="profile_title">Profil utilisateur</h2>
+      <p>Nom : Crédit Royal Client</p>
       <p>Email : client@creditroyal.fr</p>
     </section>
   </div>
